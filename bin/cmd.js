@@ -7,8 +7,15 @@ var tapeCmd = require.resolve('tape/bin/tape');
 var spawn = require('child_process').spawn;
 var fs = require('fs');
 var path = require('path');
+/**/ console.log("testing...");
+var faucetArgs = process.argv.slice(2);
+var opts = [];
+faucetArgs.forEach(function(arg) {
+    if (arg[0] === '-')
+        opts.push(arg);
+});
+var argv = minimist(faucetArgs);
 
-var argv = minimist(process.argv.slice(2));
 var tap = faucet({
     width: defined(argv.w, argv.width, process.stdout.isTTY
         ? process.stdout.columns - 5
@@ -56,7 +63,8 @@ if (files.length === 0) {
     return process.exit(1);
 }
 
-var tape = spawn(tapeCmd, files);
+var tapeArgs = opts.concat(files);
+var tape = spawn(tapeCmd, tapeArgs);
 tape.stderr.pipe(process.stderr);
 tape.stdout.pipe(tap).pipe(process.stdout);
 
