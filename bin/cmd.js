@@ -7,7 +7,7 @@ var tapeCmd = require.resolve('tape/bin/tape');
 var spawn = require('child_process').spawn;
 var fs = require('fs');
 var path = require('path');
-/**/ console.log("testing...");
+
 var faucetArgs = process.argv.slice(2);
 var opts = [];
 faucetArgs.forEach(function(arg) {
