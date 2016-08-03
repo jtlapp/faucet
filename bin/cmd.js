@@ -3,6 +3,8 @@ var faucet = require('../');
 var minimist = require('minimist');
 var defined = require('defined');
 var tapeCmd = require.resolve('tape/bin/tape');
+if (process.env.FAUCET_TAP_CMD)
+    tapeCmd = process.env.FAUCET_TAP_CMD;
 
 var spawn = require('child_process').spawn;
 var fs = require('fs');
