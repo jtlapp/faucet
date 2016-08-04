@@ -2,21 +2,23 @@
 var faucet = require('../');
 var minimist = require('minimist');
 var defined = require('defined');
-var tapeCmd;
-if (process.env.FAUCET_TAP_CMD)
-    tapeCmd = process.env.FAUCET_TAP_CMD;
-else
-    tapeCmd = require.resolve('tape/bin/tape');
+var tapeCmd = process.env.FAUCET_TAP_CMD;
+if (!tapeCmd)
+    tapeCmd = require.resolve('tape/bin/tape')
 
 var spawn = require('child_process').spawn;
 var fs = require('fs');
 var path = require('path');
 
-var faucetArgs = process.argv.slice(2);
+var faucetArgs = [];
 var opts = [];
-faucetArgs.forEach(function(arg) {
-    if (arg[0] === '-')
+process.argv.slice(2).forEach(function(arg) {
+    if (arg.length > 1 && arg.charAt(0) === '-') {
         opts.push(arg);
+    }
+    else {
+        faucetArgs.push(arg);
+    }
 });
 var argv = minimist(faucetArgs);
 
