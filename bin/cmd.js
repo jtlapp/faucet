@@ -4,7 +4,7 @@ var minimist = require('minimist');
 var defined = require('defined');
 var tapeCmd = process.env.FAUCET_TAP_CMD;
 if (!tapeCmd)
-    tapeCmd = require.resolve('tape/bin/tape')
+    tapeCmd = require.resolve('tape/bin/tape');
 
 var spawn = require('child_process').spawn;
 var fs = require('fs');
