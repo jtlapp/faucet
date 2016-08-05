@@ -13,7 +13,7 @@ var path = require('path');
 var faucetArgs = [];
 var opts = [];
 process.argv.slice(2).forEach(function(arg) {
-    if (arg.length > 1 && arg.charAt(0) === '-') {
+    if (arg !== '-' && arg[0] === '-') {
         opts.push(arg);
     }
     else {
